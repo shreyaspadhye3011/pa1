@@ -30,7 +30,9 @@ if (myArgs.length == 2) {
         console.log('*******'+req.originalUrl);
         fs.readFile(document_root + req.originalUrl, function(err, text){
             if (err) {
-                console.error(error);
+                console.error(err);
+                res.setHeader("Content-Type", "text/html");
+                return res.end("404: File Not Found");
             }
             res.setHeader("Content-Type", "text/html");
             res.end(text);

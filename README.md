@@ -4,7 +4,9 @@ Shreyas Padhye
 COEN 317 - Distributed Systems - PA1
 Feb 5, 2020
 
-This is a node.js web server serving a web page by accpeting asynchronous event-driven connections.
+This is a node.js web server serving a web page by accpeting asynchronous event-driven connections. 
+
+The index.html file was downloaded using `wget scu.edu`
 
 # setup
 1. You should have node installed in your system. Installation: https://nodejs.org/en/download/
