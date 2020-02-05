@@ -1,7 +1,7 @@
 {
   "name": "PA1",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple Web Server serving html content with images",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -10,8 +10,6 @@
   "author": "Shreyas Padhye",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.2",
-    "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
     "fs": "0.0.1-security"
   }
