@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+var fs = require('fs');
 const axios = require("axios");
 const cheerio = require("cheerio");
 const app = express()
@@ -13,7 +14,30 @@ if (myArgs.length == 2) {
 
     // home route
     app.get('/', (req, res) => {
-        res.send('Hello!')
+        // res.send('Hello!')
+        fs.readFile(document_root + "/index.html", function(err, text){
+            if (err) {
+                // console.error(error);
+                //TODO: Check err.errno and decide whether 404 or 403
+                res.setHeader("Content-Type", "text/html");
+                return res.end("404: File Not Found");
+            }
+            res.setHeader("Content-Type", "text/html");
+            return res.end(text);
+          });
+    })
+
+     // all routes
+     app.get('/:path', (req, res) => {
+        // res.send('Hello!')
+        fs.readFile(document_root + path, function(err, text){
+            if (err) {
+                console.error(error);
+            }
+            res.setHeader("Content-Type", "text/html");
+            res.end(text);
+          });
+          return;
     })
 
     // *********************** Test / experimental code ***************** //
@@ -34,8 +58,11 @@ if (myArgs.length == 2) {
     };
     // *********************** Test / experimental code ***************** //
 
+    // TODO: handle port in use case
     // bind port & listen for connections
     app.listen(port, () => console.log(`App listening on port ${port}!`))
 } else {
     console.error("Error: Please provide both the required arguments as: `node server.js <document_root> <port>`. Look at README for details")
 }
+
+
