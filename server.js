@@ -25,9 +25,10 @@ if (myArgs.length == 2) {
     })
 
      // all routes
-     app.get('/:path', (req, res) => {
+     app.get('/*', (req, res) => {
         // res.send('Hello!')
-        fs.readFile(document_root + path, function(err, text){
+        console.log('*******'+req.originalUrl);
+        fs.readFile(document_root + req.originalUrl, function(err, text){
             if (err) {
                 console.error(error);
             }
