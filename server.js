@@ -6,7 +6,6 @@ const siteUrl = "https://www.scu.edu/";
 
 // get port and document root from command line
 const myArgs = process.argv.slice(2);
-console.log('myArgs: ', myArgs);
 // validate script arguments
 if (myArgs.length == 2) {
     const document_root = myArgs[0]
