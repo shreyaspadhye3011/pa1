@@ -1,9 +1,6 @@
 const express = require('express');
 var fs = require('fs');
-const axios = require("axios");
-const cheerio = require("cheerio");
 const app = express()
-const siteUrl = "https://www.scu.edu/";
 
 // get port and document root from command line
 const myArgs = process.argv.slice(2);
@@ -39,24 +36,6 @@ if (myArgs.length == 2) {
           });
           return;
     })
-
-    // *********************** Test / experimental code ***************** //
-    // test setup
-    app.get('/test', (req, res) => res.send('Test Successful! Server responding on port ' + port))
-
-    // scrapper route
-    app.get('/scrap', (req, res) => {
-        fetchData();
-        res.end();
-    })
-
-    // scrapper code
-    const fetchData = async () => {
-        const result = await axios.get(siteUrl);
-        // console.log(cheerio.load(result.data).html())
-        return cheerio.load(result.data);
-    };
-    // *********************** Test / experimental code ***************** //
 
     // TODO: handle port in use case
     // bind port & listen for connections
