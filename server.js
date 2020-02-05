@@ -31,9 +31,10 @@ if (myArgs.length == 2) {
         fs.readFile(document_root + "/index.html", function(err, text){
         res.setHeader("Content-Type", "text/html");
             if (err) {
-                // console.error(error);
                 //TODO: Check err.errno and decide whether 404 or 403
-                return res.end("404: File Not Found");
+                // return res.end("404: File Not Found");
+                console.log("///"+err.errno)
+                return handleErrors(res, err.errno);
             }
             return res.end(text);
           });
@@ -48,8 +49,6 @@ if (myArgs.length == 2) {
             if (err) {
                 console.error(err.errno);
                 return handleErrors(res, err.errno);
-                // res.status(404);
-                // return res.end("404: File Not Found");
             }
             return res.end(text);
           });
