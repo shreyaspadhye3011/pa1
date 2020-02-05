@@ -24,4 +24,9 @@ Note: Be sure to keep document root address in quotes
 For example:
 `node server.js "/Users/COEN 317" 8000`
 
+# advanced tests
+1. Change /tests/index-403.html permission: "chmod 100 /tests/index-403.html"
+2. Try accessing http://localhost:8000/t/ests/index-403.html -- Look at network response, it shows 403 status and content says "403: Insufficient permissions on the file"
+
+# note
 If you face any issues please contact spadhye@scu.edu or shreyaspadhye3011@gmail.com
