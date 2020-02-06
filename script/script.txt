@@ -1,0 +1,3 @@
+The web server listens for connections and displays content as requested. Express is the node.js application server which we've used for routing and handling requests.
+
+While the html content is loaded directly, extra calls are required for images, css, js files. Thus separate routes are created. Everything is referneced raltive to the document_root provided.
