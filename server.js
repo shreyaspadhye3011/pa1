@@ -30,8 +30,6 @@ if (myArgs.length == 2) {
         fs.readFile(document_root + "/index.html", function(err, text) {
             res.setHeader("Content-Type", "text/html");
             res.setHeader("Date", new Date());
-            console.log("()()")            
-            console.log(new Date())
             if (err) {
                 // console.log("///"+err.errno)
                 return handleErrors(res, err.errno);
@@ -46,6 +44,8 @@ if (myArgs.length == 2) {
     // jpg routes
     app.get('/*.jpg', (req, res) => {
         fs.readFile(document_root + req.originalUrl, function(err, text) {
+            console.log(req.originalUrl)
+            console.log(document_root + req.originalUrl)
             res.setHeader("Content-Type", "image/jpg");
             res.setHeader("Date", new Date());
             if (err) {
@@ -140,7 +140,7 @@ if (myArgs.length == 2) {
     })
 
     function handleErrors(res, code) {
-        console.log(code)
+        // console.log(code)
         let statusCode = 400;
         let message = "400: Bad Request";
         switch(code) {
