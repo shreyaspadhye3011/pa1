@@ -29,6 +29,9 @@ if (myArgs.length == 2) {
     app.get('/', (req, res) => {
         fs.readFile(document_root + "/index.html", function(err, text) {
             res.setHeader("Content-Type", "text/html");
+            res.setHeader("Date", new Date());
+            console.log("()()")            
+            console.log(new Date())
             if (err) {
                 // console.log("///"+err.errno)
                 return handleErrors(res, err.errno);
@@ -44,6 +47,7 @@ if (myArgs.length == 2) {
     app.get('/*.jpg', (req, res) => {
         fs.readFile(document_root + req.originalUrl, function(err, text) {
             res.setHeader("Content-Type", "image/jpg");
+            res.setHeader("Date", new Date());
             if (err) {
                 // console.error(err.errno);
                 return handleErrors(res, err.errno);
@@ -59,6 +63,7 @@ if (myArgs.length == 2) {
     app.get('/*.js', (req, res) => {
         fs.readFile(document_root + req.originalUrl, function(err, text) {
             res.setHeader("Content-Type", "text/javascript");
+            res.setHeader("Date", new Date());
             if (err) {
                 // console.error(err.errno);
                 return handleErrors(res, err.errno);
@@ -74,6 +79,39 @@ if (myArgs.length == 2) {
     app.get('/*.png', (req, res) => {
         fs.readFile(document_root + req.originalUrl, function(err, text) {
             res.setHeader("Content-Type", "image/png");
+            res.setHeader("Date", new Date());
+            if (err) {
+                // console.error(err.errno);
+                return handleErrors(res, err.errno);
+            }
+            // Success code & content
+            res.status(200);
+            res.setHeader("Content-Length", Buffer.byteLength(text, 'utf8'));
+            return res.end(text);
+        });
+    })
+
+    // text/css routes
+    app.get('/*.css', (req, res) => {
+        fs.readFile(document_root + req.originalUrl, function(err, text) {
+            res.setHeader("Content-Type", "text/css");
+            res.setHeader("Date", new Date());
+            if (err) {
+                // console.error(err.errno);
+                return handleErrors(res, err.errno);
+            }
+            // Success code & content
+            res.status(200);
+            res.setHeader("Content-Length", Buffer.byteLength(text, 'utf8'));
+            return res.end(text);
+        });
+    })
+
+    // image/gif routes
+    app.get('/*.gif', (req, res) => {
+        fs.readFile(document_root + req.originalUrl, function(err, text) {
+            res.setHeader("Content-Type", "image/gif");
+            res.setHeader("Date", new Date());
             if (err) {
                 // console.error(err.errno);
                 return handleErrors(res, err.errno);
@@ -89,6 +127,7 @@ if (myArgs.length == 2) {
     app.get('/*', (req, res) => {
     fs.readFile(document_root + req.originalUrl, function(err, text) {
         res.setHeader("Content-Type", "text/html");
+        res.setHeader("Date", new Date());
         if (err) {
             // console.error(err.errno);
             return handleErrors(res, err.errno);
