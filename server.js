@@ -40,10 +40,10 @@ if (myArgs.length == 2) {
         });
     })
 
-     // all routes
-     app.get('/*', (req, res) => {
+    // jpg routes
+    app.get('/*.jpg', (req, res) => {
         fs.readFile(document_root + req.originalUrl, function(err, text) {
-            res.setHeader("Content-Type", "text/html");
+            res.setHeader("Content-Type", "image/jpg");
             if (err) {
                 // console.error(err.errno);
                 return handleErrors(res, err.errno);
@@ -52,10 +52,56 @@ if (myArgs.length == 2) {
             res.status(200);
             res.setHeader("Content-Length", Buffer.byteLength(text, 'utf8'));
             return res.end(text);
-          });
+        });
+    })
+
+    // text/javascript
+    app.get('/*.js', (req, res) => {
+        fs.readFile(document_root + req.originalUrl, function(err, text) {
+            res.setHeader("Content-Type", "text/javascript");
+            if (err) {
+                // console.error(err.errno);
+                return handleErrors(res, err.errno);
+            }
+            // Success code & content
+            res.status(200);
+            res.setHeader("Content-Length", Buffer.byteLength(text, 'utf8'));
+            return res.end(text);
+        });
+    })
+
+    // png routes
+    app.get('/*.png', (req, res) => {
+        fs.readFile(document_root + req.originalUrl, function(err, text) {
+            res.setHeader("Content-Type", "image/png");
+            if (err) {
+                // console.error(err.errno);
+                return handleErrors(res, err.errno);
+            }
+            // Success code & content
+            res.status(200);
+            res.setHeader("Content-Length", Buffer.byteLength(text, 'utf8'));
+            return res.end(text);
+        });
+    })
+
+    // all other routes
+    app.get('/*', (req, res) => {
+    fs.readFile(document_root + req.originalUrl, function(err, text) {
+        res.setHeader("Content-Type", "text/html");
+        if (err) {
+            // console.error(err.errno);
+            return handleErrors(res, err.errno);
+        }
+        // Success code & content
+        res.status(200);
+        res.setHeader("Content-Length", Buffer.byteLength(text, 'utf8'));
+        return res.end(text);
+        });
     })
 
     function handleErrors(res, code) {
+        console.log(code)
         let statusCode = 400;
         let message = "400: Bad Request";
         switch(code) {
