@@ -27,29 +27,30 @@ if (myArgs.length == 2) {
 
     // home route
     app.get('/', (req, res) => {
-        // res.send('Hello!')
-        fs.readFile(document_root + "/index.html", function(err, text){
-        res.setHeader("Content-Type", "text/html");
+        fs.readFile(document_root + "/index.html", function(err, text) {
+            res.setHeader("Content-Type", "text/html");
             if (err) {
                 // console.log("///"+err.errno)
                 return handleErrors(res, err.errno);
             }
             // Success code & content
             res.status(200);
+            res.setHeader("Content-Length", Buffer.byteLength(text, 'utf8'));
             return res.end(text);
-          });
+        });
     })
 
      // all routes
      app.get('/*', (req, res) => {
-        fs.readFile(document_root + req.originalUrl, function(err, text){
-        res.setHeader("Content-Type", "text/html");
+        fs.readFile(document_root + req.originalUrl, function(err, text) {
+            res.setHeader("Content-Type", "text/html");
             if (err) {
                 // console.error(err.errno);
                 return handleErrors(res, err.errno);
             }
             // Success code & content
             res.status(200);
+            res.setHeader("Content-Length", Buffer.byteLength(text, 'utf8'));
             return res.end(text);
           });
     })
@@ -68,11 +69,13 @@ if (myArgs.length == 2) {
                 break;
         }
         res.status(statusCode);
+        res.setHeader("Content-Length", Buffer.byteLength(message, 'utf8'));
         return res.end(message);
     }
 
     // bind port & listen for connections
-    app.listen(port, () => console.log(`App listening on port ${port}!`)).on('error', console.log("Error: Port already in use. Try a different port"));
+    app.listen(port, () => console.log(`App listening on port ${port}!`))
+    // .on('error', console.log("Error: Port already in use. Try a different port"));
 } else {
     console.error("Error: Please provide both the required arguments as: `node server.js <document_root> <port>`. Look at README for details")
 }
